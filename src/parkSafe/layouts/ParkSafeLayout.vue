@@ -1,9 +1,16 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import CompanyImage from '@/shared/components/CompanyImage.vue'
+
+interface Props {
+  title: string
+}
+
+defineProps<Props>()
+</script>
 
 <template>
-  <div>
-    <h1>ParkSafe Layout</h1>
-  </div>
+  <CompanyImage />
+  <h1 class="text-psAppYellow text-[32px] mt-11 font-bold tracking-wide text-center">
+    {{ title }}
+  </h1>
 </template>
-
-<style scoped></style>

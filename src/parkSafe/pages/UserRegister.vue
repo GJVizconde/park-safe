@@ -1,9 +1,7 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import ParkSafeLayout from '../layouts/ParkSafeLayout.vue'
+</script>
 
 <template>
-  <div>
-    <h1>User Register</h1>
-  </div>
+  <ParkSafeLayout title="Registro" />
 </template>
-
-<style scoped></style>
