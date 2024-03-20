@@ -12,53 +12,17 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <nav>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="25" height="25" />
-    <span>{{ title }}</span>
+  <nav class="bg-psAppBlue px-5 flex justify-between items-center p-1 h-[60px]">
+    <div class="flex gap-[5px]">
+      <img alt="Vue logo" class="" src="@/assets/logo.svg" width="25" height="25" />
+      <a href=""
+        ><span class="text-psAppYellow text-xl font-bold">{{ title }}</span></a
+      >
+    </div>
 
-    <RouterLink v-for="link of $props.links" :key="link.name" :to="link.path">{{
-      link.title
-    }}</RouterLink>
+    <div class="flex text-sm gap-5 font-bold tracking-widest">
+      <RouterLink class="text-grayLink" to="/login">Login</RouterLink>
+      <RouterLink class="text-white" to="/register">Register</RouterLink>
+    </div>
   </nav>
 </template>
-
-<style scoped>
-nav {
-  align-items: flex-start;
-  display: flex;
-  font-size: 12px;
-  margin-top: 10px;
-  text-align: center;
-  width: 100%;
-}
-
-img {
-  margin-right: 5px;
-}
-
-span {
-  margin-right: 10px;
-}
-
-a {
-  margin-right: 5px;
-}
-
-nav a.router-link-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-</style>

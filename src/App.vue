@@ -5,13 +5,14 @@ import { routerLinks } from '@/router/list-routes'
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <NavBar :links="routerLinks" />
-    </div>
-  </header>
-
-  <RouterView />
+  <div class="h-screen bg-psAppBlue flex flex-col">
+    <header>
+      <div>
+        <NavBar title="ParkSafe" :links="routerLinks" />
+      </div>
+    </header>
+    <RouterView class="flex items-center justify-center" />
+  </div>
 </template>
 
 <style scoped>
