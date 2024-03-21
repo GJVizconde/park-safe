@@ -12,6 +12,9 @@ export default {
         },
         grayLink: {
           DEFAULT: '#BEBEBE'
+        },
+        redButtonInput: {
+          DEFAULT: '#C1292E'
         }
       }
     }

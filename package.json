@@ -16,7 +16,8 @@
   },
   "dependencies": {
     "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "vue3-icons": "^0.1.13"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.2.24",

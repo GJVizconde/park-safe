@@ -4,7 +4,9 @@ import { ref, watch } from 'vue'
 import InputForm from '@/shared/components/InputForm.vue'
 import ParkSafeLayout from '../layouts/ParkSafeLayout.vue'
 import { userRegisterInputData } from '@/parkSafe/helpers/userRegisterData'
+import ButtonForm from '@/shared/components/ButtonForm.vue'
 
+ButtonForm
 interface FormData {
   email: string
   id: string
@@ -40,6 +42,10 @@ const inputGetType = (label: string, type: string): string => {
   }
 }
 
+const handleButtonClick = () => {
+  console.log('Me hicierón click')
+}
+
 watch(
   formData.value,
   (value) => {
@@ -66,4 +72,13 @@ watch(
       @change-type="onChangeType"
     />
   </section>
+
+  <div class="h-screen flex justify-center items-center">
+    <ButtonForm
+      label="Registrar"
+      buttonType="inputForm"
+      size="standard-form"
+      @click="handleButtonClick"
+    />
+  </div>
 </template>

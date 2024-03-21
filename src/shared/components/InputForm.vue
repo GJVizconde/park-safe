@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { RiEye2Line, RiEyeCloseFill } from 'vue3-icons/ri'
 
 interface Props {
   label?: string
@@ -24,7 +25,7 @@ const classOpenEyePass = () => {
   if (props.icon === false) {
     return 'hidden'
   } else if (isOpenEye.value === false) {
-    return 'w-5 absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer'
+    return 'w-[22px] h-[22px] absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer'
   }
 }
 
@@ -50,7 +51,7 @@ const onChangeType = (value: string) => {
         v-bind="$attrs"
         v-model="model"
       />
-      <img
+      <!-- <img
         :class="classOpenEyePass()"
         v-if="isOpenEye === false"
         src="/images/eye-solid.svg"
@@ -58,6 +59,19 @@ const onChangeType = (value: string) => {
       />
       <img
         class="w-5 absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer"
+        v-else
+        src="/images/eye-slash-solid.svg"
+        @click="onStatusEye(props.label)"
+      /> -->
+      <RiEye2Line
+        :class="classOpenEyePass()"
+        v-if="isOpenEye === false"
+        src="/images/eye-solid.svg"
+        @click="onStatusEye(props.label)"
+      />
+
+      <RiEyeCloseFill
+        class="w-[22px] h-[22px] absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer"
         v-else
         src="/images/eye-slash-solid.svg"
         @click="onStatusEye(props.label)"

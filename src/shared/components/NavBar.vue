@@ -28,7 +28,7 @@ const goToHome = () => {
     </div>
 
     <div class="flex text-sm gap-[10px] font-bold tracking-widest">
-      <RouterLink class="text-grayLink px-[10px]" to="/login">Login</RouterLink>
+      <RouterLink class="text-grayLink px-[10px]" to="/login">Acceso</RouterLink>
       <RouterLink class="text-white px-[10px]" to="/register">Registrate</RouterLink>
     </div>
   </nav>

@@ -25,6 +25,11 @@ const router = createRouter({
       component: () => import('../parkSafe/pages/TicketControl.vue')
     },
     {
+      path: '/ticket',
+      name: 'ticket',
+      component: () => import('../parkSafe/pages/UserTicket.vue')
+    },
+    {
       path: '/login',
       name: 'login',
       component: () => import('../parkSafe/pages/UserLogin.vue')
