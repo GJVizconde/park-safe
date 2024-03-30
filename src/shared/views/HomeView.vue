@@ -3,7 +3,7 @@
 <template>
   <main class="flex flex-col h-full">
     <section class="bg-psAppBlue flex mx-auto w-full justify-center">
-      <img class="" src="../../../public/images/parking.jpg" />
+      <img class="" src="/public/images/parking.jpg" />
     </section>
     <div
       class="flex-col h-full bg-psAppBlue flex flex-grow text-center justify-center items-center mt-[50px]"
