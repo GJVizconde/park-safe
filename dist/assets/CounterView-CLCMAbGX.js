@@ -1,1 +1,0 @@
-import{d as a,r as o,c as r,a as t,t as s,F as c,o as l}from"./index-DBsbsmYZ.js";const m=a({__name:"CounterView",setup(u){const e=o(5),n=()=>{e.value++};return(i,p)=>(l(),r(c,null,[t("h1",null,"Counter View: "+s(e.value),1),t("button",{onClick:n},"+1")],64))}});export{m as default};
