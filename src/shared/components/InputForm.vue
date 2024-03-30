@@ -5,7 +5,6 @@ import { RiEye2Line, RiEyeCloseFill } from 'vue3-icons/ri'
 interface Props {
   label?: string
   type?: string
-  labelFor?: string
   icon?: boolean
 }
 
@@ -25,7 +24,7 @@ const classOpenEyePass = () => {
   if (props.icon === false) {
     return 'hidden'
   } else if (isOpenEye.value === false) {
-    return 'w-[22px] h-[22px] absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer'
+    return 'w-[21px] h-[21px] absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer bg-ticketBg '
   }
 }
 
@@ -41,15 +40,14 @@ const onChangeType = (value: string) => {
 
 <template>
   <div class="mt-[30px]">
-    <label :for="props.labelFor" class="block text-left mb-[7px] text-white">{{
-      props.label
-    }}</label>
+    <label :for="props.label" class="block text-left mb-[7px] text-white">{{ props.label }}</label>
     <div class="relative">
       <input
         :type="props.type"
-        class="block w-full h-[42px] text-lg py-[3px] px-[10px] border rounded-md focus:outline-none"
+        class="block w-full h-[42px] text-lg py-[3px] px-[10px] border rounded-md focus:outline-none bg-ticketBg"
         v-bind="$attrs"
         v-model="model"
+        :id="props.label"
       />
       <!-- <img
         :class="classOpenEyePass()"
@@ -71,7 +69,7 @@ const onChangeType = (value: string) => {
       />
 
       <RiEyeCloseFill
-        class="w-[22px] h-[22px] absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer"
+        class="w-[21px] h-[21px] absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer bg-ticketBg"
         v-else
         src="/images/eye-slash-solid.svg"
         @click="onStatusEye(props.label)"

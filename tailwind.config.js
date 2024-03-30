@@ -15,6 +15,9 @@ export default {
         },
         redButtonInput: {
           DEFAULT: '#C1292E'
+        },
+        ticketBg: {
+          DEFAULT: '#D9D9D9'
         }
       }
     }

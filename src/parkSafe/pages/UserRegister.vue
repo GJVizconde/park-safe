@@ -61,9 +61,9 @@ watch(
     <InputForm
       v-model="formData[key]"
       v-for="(userRegister, key) in userRegisterInputData"
+      :key="key"
       :id="userRegister.label"
       :name="userRegister.label"
-      :key="key"
       :label="userRegister.label"
       :placeholder="userRegister.placeholder"
       :type="inputGetType(userRegister.label, userRegister.type)"
@@ -73,7 +73,7 @@ watch(
     />
   </section>
 
-  <div class="h-screen flex justify-center items-center">
+  <div class="flex justify-center items-center mt-[50px]">
     <ButtonForm
       label="Registrar"
       buttonType="inputForm"

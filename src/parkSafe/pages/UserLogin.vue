@@ -73,7 +73,7 @@ watch(
     />
   </section>
 
-  <div class="h-screen flex justify-center items-center">
+  <div class="flex justify-center items-center mt-[50px]">
     <ButtonForm
       label="Acceder"
       buttonType="inputForm"

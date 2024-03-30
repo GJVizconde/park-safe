@@ -18,7 +18,7 @@ watch(
 </script>
 
 <template>
-  <div class="h-screen bg-psAppBlue flex flex-col">
+  <div class="flex flex-col pb-[80px]">
     <header>
       <div>
         <NavBar v-if="route.name === 'home'" title="ParkSafe" :links="routerLinks" />

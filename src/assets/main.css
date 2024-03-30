@@ -8,6 +8,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background: #04548b;
 
   font-family: 'Roboto', sans-serif; /* Utilizando la fuente Roboto desde Google Fonts */
 }

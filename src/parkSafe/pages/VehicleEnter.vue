@@ -11,11 +11,15 @@ ButtonForm
 interface FormData {
   id: string
   licensePlates: string
+  place: string
+  time: string
 }
 
 const formData = ref<FormData>({
   id: '',
-  licensePlates: ''
+  licensePlates: '',
+  place: '',
+  time: '34242423424'
 })
 
 const handleButtonClick = () => {
@@ -36,7 +40,7 @@ watch(
 </script>
 
 <template>
-  <ParkSafeLayout title="Registrar Vehiculo" />
+  <ParkSafeLayout title="Ingresar Vehículo" />
   <section class="px-5">
     <SelectFom
       v-model="formData.id"
@@ -44,20 +48,38 @@ watch(
       label="Usuario"
       :data-options="users.users"
     />
+    <SelectFom
+      v-model="formData.licensePlates"
+      @change="onSelectChange"
+      label="Placa"
+      :data-options="users.users"
+    />
 
     <InputForm
-      v-model="formData.licensePlates"
-      id="Placa"
-      name="Placa"
-      label="Placa"
-      placeholder="Ingresar Placa"
+      v-model="formData.place"
+      id="Place"
+      name="Place"
+      label="Lugar"
+      placeholder="Ingresar Lugar"
       type="text"
+    />
+
+    <InputForm
+      class="select-none"
+      v-model="formData.time"
+      id="Place"
+      name="Place"
+      label="Fecha"
+      placeholder="Ingresar Fecha"
+      type="text"
+      :value="formData.time"
+      disabled
     />
   </section>
 
   <div class="flex justify-center items-center mt-[50px]">
     <ButtonForm
-      label="Registrar"
+      label="Ingresar"
       buttonType="inputForm"
       size="standard-form"
       @click="handleButtonClick"

@@ -40,6 +40,11 @@ const router = createRouter({
       component: () => import('../parkSafe/pages/VehicleRegister.vue')
     },
     {
+      path: '/enter-vehicle',
+      name: 'enter-vehicle',
+      component: () => import('../parkSafe/pages/VehicleEnter.vue')
+    },
+    {
       path: '/:pathMatch(.*)*',
       redirect: () => {
         console.log('Ruta no existe')
