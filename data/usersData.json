@@ -1,0 +1,32 @@
+{
+  "users": [
+    {
+      "id": "24324",
+      "username": "Clark Kent",
+      "email": "superman@example.com",
+      "password": "kryptonite123",
+      "licensePlates": ["ABC123", "DEF456"]
+    },
+    {
+      "id": "243534124",
+      "username": "Bruce Wayne",
+      "email": "batman@example.com",
+      "password": "batmobile456",
+      "licensePlates": ["GHI789"]
+    },
+    {
+      "id": "1243512543",
+      "username": "Diana Prince",
+      "email": "wonderwoman@example.com",
+      "password": "lasso789",
+      "licensePlates": ["JKL012", "MNO345"]
+    },
+    {
+      "id": "1252431",
+      "username": "Peter Parker",
+      "email": "spiderman@example.com",
+      "password": "webslinger321",
+      "licensePlates": ["PQR678"]
+    }
+  ]
+}
