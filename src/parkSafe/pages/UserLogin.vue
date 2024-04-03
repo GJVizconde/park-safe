@@ -60,9 +60,11 @@ const inputGetType = (label: string, type: string): string => {
   }
 }
 
-const handleButtonClick = async () => {
+const handleButtonClick = () => {
   console.log('Me hicierón click')
-  await axios
+  console.log('BASE_URL', BASE_URL.value)
+
+  axios
     .post(`${BASE_URL.value}/auth/login`, {
       id: formData.value.id,
       password: formData.value.password
