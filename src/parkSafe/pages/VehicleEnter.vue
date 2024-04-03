@@ -1,34 +1,53 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 
 import InputForm from '@/shared/components/InputForm.vue'
 import ParkSafeLayout from '../layouts/ParkSafeLayout.vue'
 import ButtonForm from '@/shared/components/ButtonForm.vue'
 import SelectFom from '@/shared/components/SelectForm.vue'
-import users from '@/../public/data/usersData.json'
+// import users from '@/../public/data/usersData.json'
+import axios from 'axios'
 
-ButtonForm
+const BASE_URL = ref(import.meta.env.VITE_BASE_URL)
+
 interface FormData {
-  id: string
+  userId: string
   licensePlates: string
-  place: string
-  time: string
+  parkingPlace: string
+  collaboratorId: string
 }
 
 const formData = ref<FormData>({
-  id: '',
+  userId: '',
   licensePlates: '',
-  place: '',
-  time: '34242423424'
+  parkingPlace: '',
+  collaboratorId: ''
 })
+
+const users = ref([''])
 
 const handleButtonClick = () => {
   console.log('Me hicierón click')
 }
 
+const getAllUsers = async () => {
+  try {
+    const dataUsers = (await axios.get(`${BASE_URL.value}/user`)).data
+    console.log(dataUsers)
+    users.value = dataUsers
+    console.log('users => ', users.value)
+  } catch (error) {
+    console.error('Error al obtener el ticket:', error)
+  }
+}
+
 const onSelectChange = () => {
   console.log('Se ha cambiado la opcion del Select')
 }
+
+onMounted(async () => {
+  await getAllUsers()
+})
 
 watch(
   formData.value,
@@ -43,37 +62,25 @@ watch(
   <ParkSafeLayout title="Ingresar Vehículo" />
   <section class="px-5">
     <SelectFom
-      v-model="formData.id"
+      v-model="formData.userId"
       @change="onSelectChange"
       label="Usuario"
-      :data-options="users.users"
+      :data-options="users"
     />
     <SelectFom
       v-model="formData.licensePlates"
       @change="onSelectChange"
       label="Placa"
-      :data-options="users.users"
+      :data-options="users"
     />
 
     <InputForm
-      v-model="formData.place"
+      v-model="formData.parkingPlace"
       id="Place"
       name="Place"
       label="Lugar"
       placeholder="Ingresar Lugar"
       type="text"
-    />
-
-    <InputForm
-      class="select-none"
-      v-model="formData.time"
-      id="Place"
-      name="Place"
-      label="Fecha"
-      placeholder="Ingresar Fecha"
-      type="text"
-      :value="formData.time"
-      disabled
     />
   </section>
 

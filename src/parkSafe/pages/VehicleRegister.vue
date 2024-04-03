@@ -10,7 +10,6 @@ import axios from 'axios'
 
 const BASE_URL = ref(import.meta.env.VITE_BASE_URL)
 
-ButtonForm
 interface FormData {
   user_id: string
   licensePlate: string
