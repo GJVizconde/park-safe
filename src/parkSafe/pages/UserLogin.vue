@@ -61,7 +61,7 @@ const inputGetType = (label: string, type: string): string => {
 }
 
 const handleButtonClick = () => {
-  console.log('Me hicierón click')
+  console.log('Me hicierón clicko')
   console.log('BASE_URL', BASE_URL.value)
 
   axios
