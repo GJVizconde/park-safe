@@ -4,7 +4,7 @@ export const userRegisterInputData = {
     placeholder: 'Número de cédula',
     type: 'number'
   },
-  username: {
+  name: {
     label: 'Nombre',
     placeholder: 'Ingresar nombre',
     type: 'text'

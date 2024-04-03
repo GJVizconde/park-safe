@@ -1,8 +1,9 @@
 [
   {
-    "username": "Clark Kent",
-    "employee": "Luisa Lane",
+    "name": "Clark Kent",
+    "collaborator": "Luisa Lane",
     "vehicle_id": "AFB46DV",
+    "place": "A1",
     "current_date": "miércoles, 21/03/2024 14:30:45"
   }
 ]

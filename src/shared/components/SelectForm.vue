@@ -26,7 +26,7 @@ const model = defineModel()
           {{ props.placeholder }}
         </option>
         <option v-for="(data, key) in dataOptions" :key="key" class="bg-ticketBg" :value="data.id">
-          {{ `${data.id + ' ' + data.username}` }}
+          {{ `${data.id + ' ' + data.name}` }}
         </option>
       </select>
     </div>

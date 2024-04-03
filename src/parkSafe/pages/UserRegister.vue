@@ -1,17 +1,20 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 
 import InputForm from '@/shared/components/InputForm.vue'
 import ParkSafeLayout from '../layouts/ParkSafeLayout.vue'
 import { userRegisterInputData } from '@/parkSafe/helpers/userRegisterData'
 import ButtonForm from '@/shared/components/ButtonForm.vue'
+import axios from 'axios'
+import { useRouter } from 'vue-router'
 
-ButtonForm
+const BASE_URL = ref(import.meta.env.VITE_BASE_URL)
+
 interface FormData {
   email: string
   id: string
   label: string
-  username: string
+  name: string
   password: string
   passwordConfirm: string
 }
@@ -20,9 +23,17 @@ const formData = ref<FormData>({
   email: '',
   id: '',
   label: '',
-  username: '',
+  name: '',
   password: '',
   passwordConfirm: ''
+})
+
+const userSession = ref({
+  name: '',
+  id: '',
+  email: '',
+  role: '',
+  token: ''
 })
 
 let newTypePassword = ref('password')
@@ -42,8 +53,45 @@ const inputGetType = (label: string, type: string): string => {
   }
 }
 
+const router = useRouter()
+
+const goHome = () => {
+  router.push({ path: '/home', state: { refresh: true } })
+}
+
 const handleButtonClick = () => {
+  console.log('Hola', BASE_URL.value)
   console.log('Me hicierón click')
+  axios
+    .post(`${BASE_URL.value}/auth/register`, formData.value)
+    .then((res) => {
+      console.log('responsedata', res.data)
+    })
+    .then(() => {
+      axios
+        .post(`${BASE_URL.value}/auth/login`, {
+          id: formData.value.id,
+          password: formData.value.password
+        })
+        .then((res) => {
+          const user = res.data.user
+          const token = res.data.token
+          console.log(user)
+          userSession.value = {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+            token: token
+          }
+
+          console.log('userSessionAxios', userSession.value)
+          goHome()
+        })
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 }
 
 watch(
@@ -51,8 +99,20 @@ watch(
   (value) => {
     console.log(value)
   },
+
   { deep: true }
 )
+
+watch(
+  userSession,
+  (value) => {
+    window.localStorage.setItem('userSession', JSON.stringify(value))
+    console.log(userSession.value)
+  },
+  { deep: true }
+)
+
+onMounted(() => {})
 </script>
 
 <template>

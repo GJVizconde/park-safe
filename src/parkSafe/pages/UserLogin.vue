@@ -5,6 +5,10 @@ import InputForm from '@/shared/components/InputForm.vue'
 import ParkSafeLayout from '../layouts/ParkSafeLayout.vue'
 import { loginInputData } from '@/parkSafe/helpers/loginData'
 import ButtonForm from '@/shared/components/ButtonForm.vue'
+import axios from 'axios'
+import { useRouter } from 'vue-router'
+
+const BASE_URL = ref(import.meta.env.VITE_BASE_URL)
 
 ButtonForm
 interface FormData {
@@ -16,6 +20,12 @@ interface FormData {
   passwordConfirm: string
 }
 
+const router = useRouter()
+
+const goHome = () => {
+  router.push({ path: '/home', state: { refresh: true } })
+}
+
 const formData = ref<FormData>({
   email: '',
   id: '',
@@ -23,6 +33,14 @@ const formData = ref<FormData>({
   username: '',
   password: '',
   passwordConfirm: ''
+})
+
+const userSession = ref({
+  name: '',
+  id: '',
+  email: '',
+  role: '',
+  token: ''
 })
 
 let newTypePassword = ref('password')
@@ -42,14 +60,46 @@ const inputGetType = (label: string, type: string): string => {
   }
 }
 
-const handleButtonClick = () => {
+const handleButtonClick = async () => {
   console.log('Me hicierón click')
+  await axios
+    .post(`${BASE_URL.value}/auth/login`, {
+      id: formData.value.id,
+      password: formData.value.password
+    })
+    .then((res) => {
+      const user = res.data.user
+      const token = res.data.token
+      console.log(user)
+      userSession.value = {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        token: token
+      }
+
+      console.log('userSessionAxios', userSession.value)
+      goHome()
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 }
 
 watch(
   formData.value,
   (value) => {
     console.log(value)
+  },
+  { deep: true }
+)
+
+watch(
+  userSession,
+  (value) => {
+    window.localStorage.setItem('userSession', JSON.stringify(value))
+    console.log(userSession.value)
   },
   { deep: true }
 )
