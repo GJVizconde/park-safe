@@ -11,7 +11,7 @@ interface FormData {
   email: string
   id: string
   label: string
-  username: string
+  name: string
   password: string
   passwordConfirm: string
 }
@@ -20,7 +20,7 @@ const formData = ref<FormData>({
   email: '',
   id: '',
   label: '',
-  username: '',
+  name: '',
   password: '',
   passwordConfirm: ''
 })
