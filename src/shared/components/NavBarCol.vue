@@ -94,7 +94,7 @@ router.afterEach(() => {
         class="text-white px-[2px] cursor-pointer"
         @click="
           () => {
-            goTo('enter-vehicle')
+            goTo('ticket-generate')
           }
         "
       >

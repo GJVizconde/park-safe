@@ -59,7 +59,7 @@ watch(
 </script>
 
 <template>
-  <ParkSafeLayout title="Ingresar Vehículo" />
+  <ParkSafeLayout title="Generar Ticket" />
   <section class="px-5">
     <SelectFom
       v-model="formData.userId"

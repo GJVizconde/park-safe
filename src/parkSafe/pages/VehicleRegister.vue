@@ -6,6 +6,8 @@ import ParkSafeLayout from '../layouts/ParkSafeLayout.vue'
 import ButtonForm from '@/shared/components/ButtonForm.vue'
 import SelectFom from '@/shared/components/SelectForm.vue'
 import axios from 'axios'
+import { useRouter } from 'vue-router'
+import goToRouter from '@/shared/utils/goTo'
 // import users from '@/../public/data/usersData.json'
 
 const BASE_URL = ref(import.meta.env.VITE_BASE_URL)
@@ -21,6 +23,8 @@ const formData = ref<FormData>({
   licensePlate: '',
   description: ''
 })
+
+const router = useRouter()
 
 const users = ref([''])
 
@@ -38,6 +42,8 @@ const registerVehicle = async (body: FormData) => {
   try {
     const register = (await axios.post(`${BASE_URL.value}/vehicle`, body)).data
     console.log(register)
+    goToRouter(router, 'ticket-generate')
+    console.log('YA ESTA LISTO')
   } catch (error) {
     console.error('Error al obtener el ticket:', error)
   }

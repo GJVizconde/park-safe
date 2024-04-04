@@ -23,7 +23,7 @@ interface FormData {
 const router = useRouter()
 
 const goHome = () => {
-  router.push({ path: '/home', state: { refresh: true } })
+  router.push({ path: '/' })
 }
 
 const formData = ref<FormData>({

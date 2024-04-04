@@ -56,7 +56,7 @@ const inputGetType = (label: string, type: string): string => {
 const router = useRouter()
 
 const goHome = () => {
-  router.push({ path: '/home', state: { refresh: true } })
+  router.push({ path: '/' })
 }
 
 const handleButtonClick = () => {

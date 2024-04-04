@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../shared/views/HomeView.vue'
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(''),
   routes: [
     {
       path: '/',
@@ -40,9 +40,9 @@ const router = createRouter({
       component: () => import('../parkSafe/pages/VehicleRegister.vue')
     },
     {
-      path: '/enter-vehicle',
-      name: 'enter-vehicle',
-      component: () => import('../parkSafe/pages/VehicleEnter.vue')
+      path: '/ticket-generate',
+      name: 'ticket-generate',
+      component: () => import('../parkSafe/pages/GenerateTicket.vue')
     },
     {
       path: '/:pathMatch(.*)*',
