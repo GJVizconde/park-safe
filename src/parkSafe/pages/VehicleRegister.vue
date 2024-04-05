@@ -28,6 +28,8 @@ const router = useRouter()
 
 const users = ref([''])
 
+const model = defineModel()
+
 const getAllUsers = async () => {
   try {
     const dataUser = (await axios.get(`${BASE_URL.value}/user`)).data
@@ -68,16 +70,27 @@ watch(
   },
   { deep: true }
 )
+
+watch(
+  model,
+  (value: any) => {
+    console.log('NUEVO valor de model ==>>', value)
+    console.log('NUEVO valor de value.vehicles ==>>', value.vehicles)
+    formData.value.user_id = value.id
+  },
+  { deep: true }
+)
 </script>
 
 <template>
   <ParkSafeLayout title="Registrar Vehiculo" />
   <section class="px-5">
     <SelectFom
-      v-model="formData.user_id"
+      v-model="model"
       @change="onSelectChange"
       label="Usuario"
       :data-options="users"
+      typeData="user"
     />
 
     <InputForm

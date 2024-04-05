@@ -1,8 +1,11 @@
 <script setup lang="ts">
+import type { User } from '@/parkSafe/pages/GenerateTicket.vue'
+
 interface Props {
   label?: string
-  dataOptions: any[]
+  dataOptions: any[] | undefined | User[]
   placeholder?: string
+  typeData?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -25,8 +28,23 @@ const model = defineModel()
         <option class="bg-ticketBg" value="" disabled default selected>
           {{ props.placeholder }}
         </option>
-        <option v-for="(data, key) in dataOptions" :key="key" class="bg-ticketBg" :value="data.id">
+        <option
+          v-if="typeData === 'user'"
+          v-for="(data, key) in dataOptions"
+          :key="key"
+          class="bg-ticketBg"
+          :value="data"
+        >
           {{ `${data.id + ' ' + data.name}` }}
+        </option>
+        <option
+          v-if="typeData === 'vehicle'"
+          v-for="(data, key) in dataOptions"
+          :key="key"
+          class="bg-ticketBg"
+          :value="data.id"
+        >
+          {{ `${data.licensePlate + ' ' + data.description}` }}
         </option>
       </select>
     </div>
