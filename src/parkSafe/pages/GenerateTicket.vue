@@ -28,7 +28,7 @@ export interface User {
 interface FormData {
   userId: string
   vehicleId: string
-  parkingPlace: string
+  parkingId: string
   collaboratorId: string
 }
 
@@ -44,7 +44,7 @@ const userSession = ref({
 const formData = ref<FormData>({
   userId: '',
   vehicleId: '',
-  parkingPlace: '',
+  parkingId: '',
   collaboratorId: ''
 })
 
@@ -64,6 +64,7 @@ const model = defineModel()
 const vehicles = ref<Vehicle[]>()
 const dataTicket = ref()
 const disableStatus = ref<boolean>(true)
+const availablePlaces = ref([''])
 
 const handleButtonClick = () => {
   console.log('Me hicierón click')
@@ -91,12 +92,24 @@ const generateTicket = async (body: FormData) => {
   }
 }
 
+const availableParkingPlaces = async () => {
+  try {
+    const places = (await axios.get(`${BASE_URL.value}/parking?available=true`)).data
+
+    availablePlaces.value = places
+    console.log('Lugares disponibles =>', availablePlaces.value)
+  } catch (error) {
+    console.log('Error al obtener el ticket: ', error)
+  }
+}
+
 const onSelectChange = () => {
   console.log('Se hizo un cambioo')
 }
 
 onMounted(async () => {
   await getAllUsers()
+  await availableParkingPlaces()
 })
 
 onMounted(() => {
@@ -143,27 +156,27 @@ watch(
     <SelectFom
       v-model="model"
       @change="onSelectChange"
-      label="Usuario"
+      label="Usuario:"
       :data-options="users"
       typeData="user"
     />
     <SelectFom
       v-model="formData.vehicleId"
       @change="onSelectChange"
-      label="Placa"
+      label="Placa:"
       :data-options="vehicles"
       typeData="vehicle"
       :disabled="disableStatus"
     />
-
-    <InputForm
-      v-model="formData.parkingPlace"
-      id="Place"
-      name="Place"
-      label="Lugar"
-      placeholder="Ingresar Lugar"
-      type="text"
+    <SelectFom
+      v-model="formData.parkingId"
+      @change="onSelectChange"
+      label="Lugar de estacionamiento:"
+      :data-options="availablePlaces"
+      typeData="parking"
+      :disabled="disableStatus"
     />
+
     <InputForm
       v-model="formData.collaboratorId"
       id="collaborator"

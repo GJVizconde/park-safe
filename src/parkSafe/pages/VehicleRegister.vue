@@ -30,6 +30,10 @@ const users = ref([''])
 
 const model = defineModel()
 
+//TODO: getAllUsers hacerlo una sola vez en el onMounted de la app y luego pasarlo por piña
+//TODO: No entrgar la password de los usuarios
+//TODO: Encriptar la password de los usersw
+
 const getAllUsers = async () => {
   try {
     const dataUser = (await axios.get(`${BASE_URL.value}/user`)).data
@@ -107,8 +111,7 @@ watch(
       id="Description"
       name="Description"
       label="Description"
-      placeholder="Ingresar Descripción"
-      type="text"
+      placeholder="Ingresar Descripción, marca, modelo, color"
     />
   </section>
 

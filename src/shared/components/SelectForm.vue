@@ -12,6 +12,8 @@ const props = withDefaults(defineProps<Props>(), {
   label: 'Select'
 })
 
+console.log(props.typeData)
+
 const model = defineModel()
 </script>
 
@@ -45,6 +47,15 @@ const model = defineModel()
           :value="data.id"
         >
           {{ `${data.licensePlate + ' ' + data.description}` }}
+        </option>
+        <option
+          v-if="typeData === 'parking'"
+          v-for="(data, key) in dataOptions"
+          :key="key"
+          class="bg-ticketBg"
+          :value="data.id"
+        >
+          <span>{{ data.id }}</span> - <span style="color: green">Disponible</span>
         </option>
       </select>
     </div>
