@@ -40,6 +40,7 @@ const userSession = ref({
   id: '',
   email: '',
   role: '',
+  hasTicket: false,
   token: ''
 })
 
@@ -78,6 +79,7 @@ const handleButtonClick = () => {
         name: user.name,
         email: user.email,
         role: user.role,
+        hasTicket: user.hasTicket,
         token: token
       }
 

@@ -17,6 +17,7 @@ const userSession = ref({
   id: '',
   email: '',
   role: '',
+  hasTicket: false,
   token: ''
 })
 
@@ -37,6 +38,7 @@ onMounted(() => {
         id: '',
         email: '',
         role: '',
+        hasTicket: false,
         token: ''
       }
 
@@ -53,6 +55,7 @@ router.afterEach(() => {
         id: '',
         email: '',
         role: '',
+        hasTicket: false,
         token: ''
       }
 

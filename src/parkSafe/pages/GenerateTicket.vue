@@ -37,6 +37,7 @@ const userSession = ref({
   id: '',
   email: '',
   role: '',
+  hasTicket: '',
   token: ''
 })
 
@@ -60,9 +61,9 @@ const users = ref<User[]>([
 
 const model = defineModel()
 
-const user = ref<User>()
 const vehicles = ref<Vehicle[]>()
 const dataTicket = ref()
+const disableStatus = ref<boolean>(true)
 
 const handleButtonClick = () => {
   console.log('Me hicierón click')
@@ -107,6 +108,7 @@ onMounted(() => {
         id: '',
         email: '',
         role: '',
+        hasTicket: false,
         token: ''
       }
 
@@ -129,6 +131,7 @@ watch(
     formData.value.userId = value.id
     vehicles.value = value.vehicles
     formData.value.collaboratorId = userSession.value.id
+    disableStatus.value = value?.vehicles[0]?.id ? false : true
   },
   { deep: true }
 )
@@ -150,6 +153,7 @@ watch(
       label="Placa"
       :data-options="vehicles"
       typeData="vehicle"
+      :disabled="disableStatus"
     />
 
     <InputForm

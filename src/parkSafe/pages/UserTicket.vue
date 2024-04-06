@@ -8,8 +8,6 @@ import { useRoute, useRouter } from 'vue-router'
 
 const BASE_URL = ref(import.meta.env.VITE_BASE_URL)
 
-const route = useRoute()
-
 let ticketData = ref([
   {
     name: '',
@@ -37,7 +35,7 @@ const getTicket = async (id: number) => {
         name: dataTicket.user.name,
         collaborator: dataTicket?.collaborators[0]?.name,
         vehicle_id: dataTicket.vehicle.licensePlate,
-        place: dataTicket.parkingPlace,
+        place: dataTicket.parkingId,
         current_date: dataTicket.checkIn
       }
     ]
