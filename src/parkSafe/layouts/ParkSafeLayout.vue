@@ -10,7 +10,7 @@ defineProps<Props>()
 
 <template>
   <CompanyImage />
-  <h1 class="text-psAppYellow text-[32px] mt-11 font-bold tracking-wide text-center">
+  <h1 class="text-psAppYellow text-[32px] mt-11 font-bold tracking-wide text-center w-full">
     {{ title }}
   </h1>
 </template>

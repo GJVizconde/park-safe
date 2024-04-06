@@ -74,12 +74,12 @@ router.afterEach(() => {
 </script>
 
 <template>
-  <nav class="bg-psAppBlue px-5 flex justify-between items-center p-1 h-[60px]">
-    <div class="flex gap-[5px] cursor-pointer select-none flex-shrink-0" @click="goToHome">
-      <img alt="Vue logo" class="" src="@/assets/logo.svg" width="25" height="25" />
-      <a class="text-psAppYellow text-xl font-bold cursor-pointer">{{ title }}</a>
+  <nav class="bg-psAppBlue px-2 flex justify-between items-center p-1 h-[60px] w-full">
+    <div class="flex gap-[5px] cursor-pointer select-none" @click="goToHome">
+      <img alt="Vue logo" class="hidden md:block" src="@/assets/logo.svg" width="25" height="25" />
+      <a class="text-psAppYellow text-lg md:text-xl font-bold cursor-pointer">{{ title }}</a>
     </div>
-    <ul class="flex text-sm gap-[10px] font-bold tracking-widest items-center text-center ml-2">
+    <ul class="flex text-[12px] gap-[2px] font-bold tracking-widest items-center text-center ml-2">
       <li
         class="text-white px-[2px] cursor-pointer"
         @click="
