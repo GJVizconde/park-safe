@@ -4,7 +4,6 @@ import ticketExample from '@/../public/data/ticketExample.json'
 
 import ParkSafeLayout from '../layouts/ParkSafeLayout.vue'
 import axios from 'axios'
-import { useRoute, useRouter } from 'vue-router'
 
 const BASE_URL = ref(import.meta.env.VITE_BASE_URL)
 
