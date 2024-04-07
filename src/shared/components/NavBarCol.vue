@@ -81,10 +81,22 @@ router.afterEach(() => {
     </div>
     <ul class="flex text-[12px] gap-[2px] font-bold tracking-widest items-center text-center ml-2">
       <li
+        v-if="userSession.role === 'COLLABORATOR'"
         class="text-white px-[2px] cursor-pointer"
         @click="
           () => {
             goTo('register-vehicle')
+          }
+        "
+      >
+        {{ `Registrar ` }}
+      </li>
+      <li
+        v-if="userSession.role === 'ADMIN'"
+        class="text-white px-[2px] cursor-pointer"
+        @click="
+          () => {
+            goTo('register')
           }
         "
       >

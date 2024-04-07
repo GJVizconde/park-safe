@@ -60,38 +60,59 @@ const goHome = () => {
 }
 
 const handleButtonClick = () => {
-  console.log('Hola', BASE_URL.value)
-  console.log('Me hicierón click')
-  axios
-    .post(`${BASE_URL.value}/auth/register`, formData.value)
-    .then((res) => {
-      console.log('responsedata', res.data)
-    })
-    .then(() => {
-      axios
-        .post(`${BASE_URL.value}/auth/login`, {
-          id: formData.value.id,
-          password: formData.value.password
-        })
-        .then((res) => {
-          const user = res.data.user
-          const token = res.data.token
-          console.log(user)
-          userSession.value = {
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            role: user.role,
-            token: token
-          }
+  console.log(userSession.value.role === 'ADMIN')
+  if (userSession.value.role === 'ADMIN') {
+    console.log('Hola', BASE_URL.value)
+    console.log('Me hicierón click')
+    axios
+      .post(`${BASE_URL.value}/collaborator/register`, {
+        email: formData.value.email,
+        id: formData.value.id,
+        name: formData.value.name,
+        password: formData.value.password,
+        role: 'COLLABORATOR'
+      })
+      .then((res) => {
+        console.log('responsedata', res.data)
+      })
 
-          console.log('userSessionAxios', userSession.value)
-          goHome()
-        })
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+      .catch((error) => {
+        console.log(error)
+      })
+  } else {
+    console.log('Hola', BASE_URL.value)
+    console.log('Me hicierón click')
+    axios
+      .post(`${BASE_URL.value}/auth/register`, formData.value)
+      .then((res) => {
+        console.log('responsedata', res.data)
+      })
+      .then(() => {
+        axios
+          .post(`${BASE_URL.value}/auth/login`, {
+            id: formData.value.id,
+            password: formData.value.password
+          })
+          .then((res) => {
+            const user = res.data.user
+            const token = res.data.token
+            console.log(user)
+            userSession.value = {
+              id: user.id,
+              name: user.name,
+              email: user.email,
+              role: user.role,
+              token: token
+            }
+
+            console.log('userSessionAxios', userSession.value)
+            goHome()
+          })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
 }
 
 watch(
@@ -111,6 +132,22 @@ watch(
   },
   { deep: true }
 )
+
+onMounted(() => {
+  const storedData = localStorage.getItem('userSession')
+  userSession.value = storedData
+    ? JSON.parse(storedData)
+    : {
+        name: '',
+        id: '',
+        email: '',
+        role: '',
+        hasTicket: false,
+        token: ''
+      }
+
+  console.log(userSession.value.role)
+})
 
 onMounted(() => {})
 </script>

@@ -80,7 +80,10 @@ router.afterEach(() => {
           v-if="route.name !== 'home' && userSession.role === 'USER'"
           title="ParkSafe"
         />
-        <NavBarCol v-if="userSession.role === 'COLLABORATOR'" title="ParkSafe" />
+        <NavBarCol
+          v-if="userSession.role === 'COLLABORATOR' || userSession.role === 'ADMIN'"
+          title="ParkSafe"
+        />
       </div>
     </header>
     <RouterView />
