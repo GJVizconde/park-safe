@@ -4,7 +4,7 @@
 
 /* No necesitas incluir las etiquetas <link> aquí si cargas la fuente desde Google Fonts */
 
-* {
+body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;

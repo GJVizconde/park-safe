@@ -110,7 +110,7 @@ router.afterEach(() => {
           }
         "
       >
-        {{ `Ingresar ` }}
+        {{ `Ticket ` }}
       </li>
       <li
         class="text-white px-[2px] cursor-pointer"

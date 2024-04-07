@@ -7,6 +7,8 @@ import { userRegisterInputData } from '@/parkSafe/helpers/userRegisterData'
 import ButtonForm from '@/shared/components/ButtonForm.vue'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
 
 const BASE_URL = ref(import.meta.env.VITE_BASE_URL)
 
@@ -33,6 +35,7 @@ const userSession = ref({
   id: '',
   email: '',
   role: '',
+  hasTicket: false,
   token: ''
 })
 
@@ -59,59 +62,77 @@ const goHome = () => {
   router.push({ path: '/' })
 }
 
-const handleButtonClick = () => {
-  console.log(userSession.value.role === 'ADMIN')
-  if (userSession.value.role === 'ADMIN') {
-    console.log('Hola', BASE_URL.value)
-    console.log('Me hicierón click')
-    axios
-      .post(`${BASE_URL.value}/collaborator/register`, {
+const successToast = () => {
+  toast.success('Inicio de Sesion, exitoso !', {
+    theme: 'colored',
+    autoClose: 2000,
+    onClose: goHome,
+    position: 'bottom-center'
+  }) // ToastOptions
+}
+
+const userLogin = async () => {
+  const loginData = (
+    await axios.post(`${BASE_URL.value}/auth/login`, {
+      id: formData.value.id,
+      password: formData.value.password
+    })
+  ).data
+  console.log(loginData)
+  const user = loginData.user
+  const token = loginData.token
+  console.log(user)
+  userSession.value = {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    role: user.role,
+    hasTicket: user.hasTicket,
+    token: token
+  }
+  successToast()
+}
+
+const registerNewUser = async () => {
+  console.log('Hola', BASE_URL.value)
+  console.log('Me hicierón click')
+
+  try {
+    const userData = (await axios.post(`${BASE_URL.value}/auth/register`, formData.value)).data
+    console.log('UserData =>>', userData)
+    await userLogin()
+  } catch (error) {
+    console.log('Error registrando al nuevo usuario:', error)
+  }
+}
+
+const registerNewCollaborator = async () => {
+  console.log('Hola', BASE_URL.value)
+  console.log('Me hicierón click, soy ADMIN')
+
+  try {
+    const newCollaborator = (
+      await axios.post(`${BASE_URL.value}/collaborator/register`, {
         email: formData.value.email,
         id: formData.value.id,
         name: formData.value.name,
         password: formData.value.password,
         role: 'COLLABORATOR'
       })
-      .then((res) => {
-        console.log('responsedata', res.data)
-      })
+    ).data
 
-      .catch((error) => {
-        console.log(error)
-      })
+    console.log(newCollaborator)
+  } catch (error) {
+    console.log('Error registrando un nuevo empleado: ', error)
+  }
+}
+
+const handleButtonClick = () => {
+  console.log(userSession.value.role === 'ADMIN')
+  if (userSession.value.role === 'ADMIN') {
+    registerNewCollaborator()
   } else {
-    console.log('Hola', BASE_URL.value)
-    console.log('Me hicierón click')
-    axios
-      .post(`${BASE_URL.value}/auth/register`, formData.value)
-      .then((res) => {
-        console.log('responsedata', res.data)
-      })
-      .then(() => {
-        axios
-          .post(`${BASE_URL.value}/auth/login`, {
-            id: formData.value.id,
-            password: formData.value.password
-          })
-          .then((res) => {
-            const user = res.data.user
-            const token = res.data.token
-            console.log(user)
-            userSession.value = {
-              id: user.id,
-              name: user.name,
-              email: user.email,
-              role: user.role,
-              token: token
-            }
-
-            console.log('userSessionAxios', userSession.value)
-            goHome()
-          })
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    registerNewUser()
   }
 }
 

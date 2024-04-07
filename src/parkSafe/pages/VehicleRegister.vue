@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
 
 import InputForm from '@/shared/components/InputForm.vue'
 import ParkSafeLayout from '../layouts/ParkSafeLayout.vue'
@@ -44,11 +46,22 @@ const getAllUsers = async () => {
   }
 }
 
+const successToast = () => {
+  toast.success('Vehículo registrado con exito!', {
+    theme: 'colored',
+    autoClose: 2000,
+    onClose: () => {
+      goToRouter(router, 'ticket-generate')
+    },
+    position: 'bottom-center'
+  }) // ToastOptions
+}
+
 const registerVehicle = async (body: FormData) => {
   try {
     const register = (await axios.post(`${BASE_URL.value}/vehicle`, body)).data
     console.log(register)
-    goToRouter(router, 'ticket-generate')
+    successToast()
     console.log('YA ESTA LISTO')
   } catch (error) {
     console.error('Error al obtener el ticket:', error)

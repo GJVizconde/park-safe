@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
 
 import ParkSafeLayout from '../layouts/ParkSafeLayout.vue'
 import axios from 'axios'
 import AccordionTickets from '../components/AccordionTickets.vue'
+import { useRouter } from 'vue-router'
 
 const BASE_URL = ref(import.meta.env.VITE_BASE_URL)
 
@@ -49,6 +52,8 @@ const formData = ref<FormData>({
   passwordConfirm: ''
 })
 
+const router = useRouter()
+
 const tickets = ref<ParkingReservation[]>()
 
 const getActiveTickets = async () => {
@@ -65,10 +70,19 @@ const getActiveTickets = async () => {
   }
 }
 
+const successToast = () => {
+  toast.success(`Se le dió salida al vehículo`, {
+    theme: 'colored',
+    autoClose: 2000,
+    position: 'bottom-center'
+  }) // ToastOptions
+}
+
 const handleButtonClick = async (quit_id: string) => {
   console.log('Hicieron click a dar salida', quit_id)
 
   const ticketDelected = (await axios.patch(`${BASE_URL.value}/ticket/${quit_id}`)).data
+  successToast()
 
   console.log(ticketDelected)
   await getActiveTickets()

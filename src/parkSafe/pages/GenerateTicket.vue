@@ -1,12 +1,17 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
+import axios from 'axios'
 
 import InputForm from '@/shared/components/InputForm.vue'
 import ParkSafeLayout from '../layouts/ParkSafeLayout.vue'
 import ButtonForm from '@/shared/components/ButtonForm.vue'
 import SelectFom from '@/shared/components/SelectForm.vue'
+import goToRouter from '@/shared/utils/goTo'
+import { useRouter } from 'vue-router'
+
 // import users from '@/../public/data/usersData.json'
-import axios from 'axios'
 
 const BASE_URL = ref(import.meta.env.VITE_BASE_URL)
 
@@ -59,6 +64,8 @@ const users = ref<User[]>([
   }
 ])
 
+const router = useRouter()
+
 const model = defineModel()
 
 const vehicles = ref<Vehicle[]>()
@@ -69,6 +76,17 @@ const availablePlaces = ref([''])
 const handleButtonClick = () => {
   console.log('Me hicierón click')
   generateTicket(formData.value)
+}
+
+const successToast = () => {
+  toast.success('El vehículo ha ingresado al estacionamiento!', {
+    theme: 'colored',
+    autoClose: 2000,
+    onClose: () => {
+      goToRouter(router, 'ticket-control')
+    },
+    position: 'bottom-center'
+  }) // ToastOptions
 }
 
 const getAllUsers = async () => {
@@ -87,6 +105,7 @@ const generateTicket = async (body: FormData) => {
     const ticket = (await axios.post(`${BASE_URL.value}/ticket/`, body)).data
     console.log(ticket)
     dataTicket.value = ticket
+    successToast()
   } catch (error) {
     console.error('Error al generar el ticket: ', error)
   }
