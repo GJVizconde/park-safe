@@ -131,7 +131,7 @@ watch(
       </div>
     </div>
     <h1 v-else class="text-center text-2xl font-bold text-white">
-      No hay tickets activos en este momento
+      No hay vehículos en este momento en el estacionamiento
     </h1>
   </section>
 </template>

@@ -73,7 +73,7 @@ watch(
 <template>
   <ParkSafeLayout title="User Ticket" />
 
-  <section class="flex flex-col gap-8 items-center justify-center mt-7 px-11">
+  <section class="flex flex-col gap-8 items-center justify-center mt-10 px-11">
     <div v-if="ticketData[0].name !== ''">
       <div
         class="grid grid-cols-2 gap-y-5 bg-ticketBg w-full p-7 rounded-2xl items-center justify-center"
@@ -93,6 +93,8 @@ watch(
       </div>
     </div>
 
-    <h1 v-else class="text-white text-2xl mt-20 uppercase">No tienes ticket registrado</h1>
+    <h1 v-else class="text-center text-2xl font-bold text-white">
+      No tienes ningún vehículo en el estacionamiento
+    </h1>
   </section>
 </template>
