@@ -21,7 +21,7 @@ const userSession = ref({
 const router = useRouter()
 
 const goHome = () => {
-  router.push({ path: '/home', state: { refresh: true } })
+  router.push({ path: '/', state: { refresh: true } })
 }
 
 const removeLocalStorage = () => {
