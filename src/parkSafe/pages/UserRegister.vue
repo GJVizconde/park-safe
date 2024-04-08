@@ -140,6 +140,11 @@ const handleButtonClick = () => {
   if (userSession.value.role === 'ADMIN') {
     registerNewCollaborator()
     newCollaboratorToast()
+    formData.value.email = ''
+    formData.value.id = ''
+    formData.value.name = ''
+    formData.value.password = ''
+    formData.value.passwordConfirm = ''
   } else {
     registerNewUser()
   }
