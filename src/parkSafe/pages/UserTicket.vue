@@ -28,7 +28,6 @@ const userSession = ref({
 const getTicket = async (id: number) => {
   try {
     const dataTicket = (await axios.get(`${BASE_URL.value}/ticket/userTicket?id=${id}`)).data
-    console.log(dataTicket)
     ticketData.value = [
       {
         name: dataTicket.user.name,
@@ -54,8 +53,6 @@ onMounted(async () => {
         role: '',
         token: ''
       }
-
-  console.log('User session:', userSession.value)
 
   // Llamar a getTicket después de obtener los datos de la sesión del usuario
   await getTicket(Number(userSession.value.id))

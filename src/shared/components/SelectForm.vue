@@ -12,8 +12,6 @@ const props = withDefaults(defineProps<Props>(), {
   label: 'Select'
 })
 
-console.log(props.typeData)
-
 const model = defineModel()
 </script>
 

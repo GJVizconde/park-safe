@@ -39,7 +39,6 @@ const model = defineModel()
 const getAllUsers = async () => {
   try {
     const dataUser = (await axios.get(`${BASE_URL.value}/user`)).data
-    console.log(dataUser)
     users.value = dataUser
   } catch (error) {
     console.error('Error al obtener el ticket:', error)
@@ -60,9 +59,7 @@ const successToast = () => {
 const registerVehicle = async (body: FormData) => {
   try {
     const register = (await axios.post(`${BASE_URL.value}/vehicle`, body)).data
-    console.log(register)
     successToast()
-    console.log('YA ESTA LISTO')
   } catch (error) {
     console.error('Error al obtener el ticket:', error)
   }
@@ -73,26 +70,20 @@ const handleButtonClick = () => {
 }
 
 const onSelectChange = () => {
-  console.log('Se ha cambiado la opcion del Select')
+  // console.log('Se ha cambiado la opcion del Select')
 }
 
 onMounted(async () => {
   await getAllUsers()
 })
 
-watch(
-  formData.value,
-  (value) => {
-    console.log(value)
-  },
-  { deep: true }
-)
+watch(formData.value, (_value) => {}, { deep: true })
 
 watch(
   model,
   (value: any) => {
-    console.log('NUEVO valor de model ==>>', value)
-    console.log('NUEVO valor de value.vehicles ==>>', value.vehicles)
+    // console.log('NUEVO valor de model ==>>', value)
+    // console.log('NUEVO valor de value.vehicles ==>>', value.vehicles)
     formData.value.user_id = value.id
   },
   { deep: true }

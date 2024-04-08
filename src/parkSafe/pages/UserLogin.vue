@@ -79,10 +79,8 @@ const userLogin = async () => {
       password: formData.value.password
     })
   ).data
-  console.log(loginData)
   const user = loginData.user
   const token = loginData.token
-  console.log(user)
   userSession.value = {
     id: user.id,
     name: user.name,
@@ -94,31 +92,23 @@ const userLogin = async () => {
 }
 
 const handleButtonClick = async () => {
-  console.log('Me hicierón clicko')
-  console.log('BASE_URL', BASE_URL.value)
+  // console.log('BASE_URL', BASE_URL.value)
 
   try {
     await userLogin()
-    console.log('userSessionAxios', userSession.value)
     successToast()
   } catch (error) {
     console.log('Error iniciando sesion:', error)
   }
 }
 
-watch(
-  formData.value,
-  (value) => {
-    console.log(value)
-  },
-  { deep: true }
-)
+watch(formData.value, (_value) => {}, { deep: true })
 
 watch(
   userSession,
   (value) => {
     window.localStorage.setItem('userSession', JSON.stringify(value))
-    console.log(userSession.value)
+    // console.log(userSession.value)
   },
   { deep: true }
 )

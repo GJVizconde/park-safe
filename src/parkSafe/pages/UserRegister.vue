@@ -86,10 +86,8 @@ const userLogin = async () => {
       password: formData.value.password
     })
   ).data
-  console.log(loginData)
   const user = loginData.user
   const token = loginData.token
-  console.log(user)
   userSession.value = {
     id: user.id,
     name: user.name,
@@ -102,12 +100,9 @@ const userLogin = async () => {
 }
 
 const registerNewUser = async () => {
-  console.log('Hola', BASE_URL.value)
-  console.log('Me hicierón click')
-
   try {
     const userData = (await axios.post(`${BASE_URL.value}/auth/register`, formData.value)).data
-    console.log('UserData =>>', userData)
+
     await userLogin()
   } catch (error) {
     console.log('Error registrando al nuevo usuario:', error)
@@ -115,9 +110,6 @@ const registerNewUser = async () => {
 }
 
 const registerNewCollaborator = async () => {
-  console.log('Hola', BASE_URL.value)
-  console.log('Me hicierón click, soy ADMIN')
-
   try {
     const newCollaborator = (
       await axios.post(`${BASE_URL.value}/collaborator/register`, {
@@ -128,15 +120,12 @@ const registerNewCollaborator = async () => {
         role: 'COLLABORATOR'
       })
     ).data
-
-    console.log(newCollaborator)
   } catch (error) {
     console.log('Error registrando un nuevo empleado: ', error)
   }
 }
 
 const handleButtonClick = () => {
-  console.log(userSession.value.role === 'ADMIN')
   if (userSession.value.role === 'ADMIN') {
     registerNewCollaborator()
     newCollaboratorToast()
@@ -152,9 +141,7 @@ const handleButtonClick = () => {
 
 watch(
   formData.value,
-  (value) => {
-    console.log(value)
-  },
+  (_value) => {},
 
   { deep: true }
 )
@@ -163,7 +150,7 @@ watch(
   userSession,
   (value) => {
     window.localStorage.setItem('userSession', JSON.stringify(value))
-    console.log(userSession.value)
+    // console.log(userSession.value)
   },
   { deep: true }
 )
@@ -180,8 +167,6 @@ onMounted(() => {
         hasTicket: false,
         token: ''
       }
-
-  console.log(userSession.value.role)
 })
 
 onMounted(() => {})

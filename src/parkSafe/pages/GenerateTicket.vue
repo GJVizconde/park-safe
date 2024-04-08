@@ -74,7 +74,6 @@ const disableStatus = ref<boolean>(true)
 const availablePlaces = ref([''])
 
 const handleButtonClick = () => {
-  console.log('Me hicierón click')
   generateTicket(formData.value)
 }
 
@@ -92,9 +91,7 @@ const successToast = () => {
 const getAllUsers = async () => {
   try {
     const dataUsers = (await axios.get(`${BASE_URL.value}/user`)).data
-    console.log(dataUsers)
     users.value = dataUsers
-    console.log('users => ', users.value)
   } catch (error) {
     console.error('Error al obtener el ticket:', error)
   }
@@ -103,7 +100,6 @@ const getAllUsers = async () => {
 const generateTicket = async (body: FormData) => {
   try {
     const ticket = (await axios.post(`${BASE_URL.value}/ticket/`, body)).data
-    console.log(ticket)
     dataTicket.value = ticket
     successToast()
   } catch (error) {
@@ -116,15 +112,12 @@ const availableParkingPlaces = async () => {
     const places = (await axios.get(`${BASE_URL.value}/parking?available=true`)).data
 
     availablePlaces.value = places
-    console.log('Lugares disponibles =>', availablePlaces.value)
   } catch (error) {
     console.log('Error al obtener el ticket: ', error)
   }
 }
 
-const onSelectChange = () => {
-  console.log('Se hizo un cambioo')
-}
+const onSelectChange = () => {}
 
 onMounted(async () => {
   await getAllUsers()
@@ -147,19 +140,11 @@ onMounted(() => {
   // console.log(userSession.value.role)
 })
 
-watch(
-  formData.value,
-  (value) => {
-    console.log('FormData has changed', value)
-  },
-  { deep: true }
-)
+watch(formData.value, (_value) => {}, { deep: true })
 
 watch(
   model,
   (value: any) => {
-    console.log('NUEVO valor de model ==>>', value)
-    console.log('NUEVO valor de value.vehicles ==>>', value.vehicles)
     formData.value.userId = value.id
     vehicles.value = value.vehicles
     formData.value.collaboratorId = userSession.value.id

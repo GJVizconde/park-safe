@@ -63,8 +63,6 @@ const getActiveTickets = async () => {
     ).data
 
     tickets.value = allTickets
-
-    console.log(tickets.value)
   } catch (error) {
     console.error('Error al obtener los tickets activos:', error)
   }
@@ -79,12 +77,9 @@ const successToast = () => {
 }
 
 const handleButtonClick = async (quit_id: string) => {
-  console.log('Hicieron click a dar salida', quit_id)
-
   const ticketDelected = (await axios.patch(`${BASE_URL.value}/ticket/${quit_id}`)).data
   successToast()
 
-  console.log(ticketDelected)
   await getActiveTickets()
 }
 
@@ -92,13 +87,7 @@ onMounted(async () => {
   await getActiveTickets()
 })
 
-watch(
-  formData.value,
-  (value) => {
-    console.log(value)
-  },
-  { deep: true }
-)
+watch(formData.value, (_value) => {}, { deep: true })
 </script>
 
 <template>

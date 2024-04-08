@@ -39,8 +39,6 @@ onMounted(() => {
         role: '',
         token: ''
       }
-
-  console.log(userSession.value.role)
 })
 
 router.afterEach(() => {
@@ -55,9 +53,6 @@ router.afterEach(() => {
         role: '',
         token: ''
       }
-
-  console.log('Ruta cambiada', userSession.value.role)
-  console.log(userSession.value.id)
 })
 </script>
 
