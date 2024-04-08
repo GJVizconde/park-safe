@@ -71,6 +71,14 @@ const successToast = () => {
   }) // ToastOptions
 }
 
+const newCollaboratorToast = () => {
+  toast.success('Registro de empleado, exitoso !', {
+    theme: 'colored',
+    autoClose: 2000,
+    position: 'bottom-center'
+  }) // ToastOptions
+}
+
 const userLogin = async () => {
   const loginData = (
     await axios.post(`${BASE_URL.value}/auth/login`, {
@@ -131,6 +139,7 @@ const handleButtonClick = () => {
   console.log(userSession.value.role === 'ADMIN')
   if (userSession.value.role === 'ADMIN') {
     registerNewCollaborator()
+    newCollaboratorToast()
   } else {
     registerNewUser()
   }
