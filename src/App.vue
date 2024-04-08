@@ -23,8 +23,8 @@ const userSession = ref({
 
 watch(
   () => route.name,
-  (value) => {
-    console.log(value)
+  (_value) => {
+    // console.log(value)
   },
   { deep: true }
 )
