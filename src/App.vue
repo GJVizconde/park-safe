@@ -59,8 +59,8 @@ router.afterEach(() => {
         token: ''
       }
 
-  console.log('Ruta cambiada', userSession.value.role)
-  console.log(userSession.value.id)
+  // console.log('Ruta cambiada', userSession.value.role)
+  // console.log(userSession.value.id)
 })
 </script>
 
