@@ -22,7 +22,8 @@ const userSession = ref({
   id: '',
   email: '',
   role: '',
-  token: ''
+  token: '',
+  hasTicket: false
 })
 
 const getTicket = async (id: number) => {
@@ -51,11 +52,15 @@ onMounted(async () => {
         id: '',
         email: '',
         role: '',
-        token: ''
+        token: '',
+        hasTicket: false
       }
 
   // Llamar a getTicket después de obtener los datos de la sesión del usuario
-  await getTicket(Number(userSession.value.id))
+
+  if (userSession.value.hasTicket) {
+    await getTicket(Number(userSession.value.id))
+  }
 })
 
 watch(
@@ -79,12 +84,12 @@ watch(
       >
         <p class="bg-ticketBg font-bold">Cliente:</p>
         <p class="bg-ticketBg">{{ ticket.name }}</p>
-        <p class="bg-ticketBg font-bold">Empleado:</p>
-        <p class="bg-ticketBg">{{ ticket.collaborator }}</p>
         <p class="bg-ticketBg font-bold">Vehiculo:</p>
         <p class="bg-ticketBg">{{ ticket.vehicle_id }}</p>
         <p class="bg-ticketBg font-bold">Puesto:</p>
         <p class="bg-ticketBg">{{ ticket.place }}</p>
+        <p class="bg-ticketBg font-bold">Empleado:</p>
+        <p class="bg-ticketBg">{{ ticket.collaborator }}</p>
         <p class="bg-ticketBg font-bold">Fecha:</p>
         <p class="bg-ticketBg">{{ ticket.current_date }}</p>
       </div>

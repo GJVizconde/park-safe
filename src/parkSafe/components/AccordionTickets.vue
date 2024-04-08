@@ -46,6 +46,14 @@
           <p class="text-amTextGray bg-white">{{ description_title }}</p>
           <p class="bg-white">{{ description }}</p>
         </div>
+        <div class="grid grid-cols-[1fr_3fr] border-b pb-5 gap-x-2 pt-5 items-center bg-white">
+          <p class="text-amTextGray bg-white">{{ time_title }}</p>
+          <p class="bg-white">{{ time }}</p>
+        </div>
+        <div class="grid grid-cols-[1fr_3fr] border-b pb-5 gap-x-2 pt-5 items-center bg-white">
+          <p class="text-amTextGray bg-white">{{ collaborator_title }}</p>
+          <p class="bg-white">{{ collaborator }}</p>
+        </div>
 
         <div class="text-center bg-white">
           <a
@@ -72,6 +80,10 @@ export default {
     licensePlate: String,
     description_title: String,
     description: String,
+    time_title: String,
+    time: String,
+    collaborator_title: String,
+    collaborator: String,
     quit_title: String,
     quit_id: String,
 
