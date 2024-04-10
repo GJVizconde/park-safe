@@ -32,6 +32,7 @@ interface ParkingReservation {
   user: User
   collaborators: { name: string }[]
   vehicle: Vehicle
+  checkInFormatted: string
 }
 
 interface FormData {
@@ -63,6 +64,7 @@ const getActiveTickets = async () => {
     ).data
 
     tickets.value = allTickets
+    console.log(tickets.value)
   } catch (error) {
     console.error('Error al obtener los tickets activos:', error)
   }
@@ -77,7 +79,18 @@ const successToast = () => {
 }
 
 const handleButtonClick = async (quit_id: string) => {
-  const ticketDelected = (await axios.patch(`${BASE_URL.value}/ticket/${quit_id}`)).data
+  const ticketDelected = (
+    await axios.patch(
+      `${BASE_URL.value}/ticket/${quit_id}`,
+      {},
+      {
+        headers: {
+          'X-Timezone-Offset': new Date().getTimezoneOffset()
+        }
+      }
+    )
+  ).data
+  console.log(ticketDelected)
   successToast()
 
   await getActiveTickets()
@@ -107,7 +120,7 @@ watch(formData.value, (_value) => {}, { deep: true })
           description_title="Descripción:"
           :description="ticket.vehicle.description"
           time_title="Hora de entrada:"
-          :time="ticket.checkIn"
+          :time="ticket.checkInFormatted"
           collaborator_title="Empleado:"
           :collaborator="ticket.collaborators[0].name"
           quit_title="Dar Salida"
