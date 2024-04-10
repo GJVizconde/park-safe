@@ -98,7 +98,7 @@ const handleButtonClick = async () => {
     await userLogin()
     successToast()
   } catch (error) {
-    console.log('Error iniciando sesion:', error)
+    console.log('Error iniciando sesion: ', error)
   }
 }
 
