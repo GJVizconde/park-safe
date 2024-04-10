@@ -71,6 +71,7 @@ const model = defineModel()
 const vehicles = ref<Vehicle[]>()
 const dataTicket = ref()
 const disableStatus = ref<boolean>(true)
+const disableUsers = ref<boolean>(true)
 const availablePlaces = ref([''])
 
 const handleButtonClick = () => {
@@ -92,6 +93,7 @@ const getAllUsers = async () => {
   try {
     const dataUsers = (await axios.get(`${BASE_URL.value}/user?ticket=false&hasVehicle=true`)).data
     users.value = dataUsers
+    disableUsers.value = false
   } catch (error) {
     console.error('Error al obtener el ticket:', error)
   }
@@ -107,7 +109,6 @@ const generateTicket = async (body: FormData) => {
       })
     ).data
 
-    console.log(ticket)
     dataTicket.value = ticket
     successToast()
   } catch (error) {
@@ -169,8 +170,10 @@ watch(
       v-model="model"
       @change="onSelectChange"
       label="Usuario:"
+      placeholder="Seleccionar Usuario"
       :data-options="users"
       typeData="user"
+      :disabled="disableUsers ? true : false"
     />
     <SelectFom
       v-model="formData.vehicleId"

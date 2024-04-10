@@ -25,7 +25,7 @@ const model = defineModel()
         v-model="model"
         :id="label"
       >
-        <option class="bg-ticketBg" value="" disabled default selected>
+        <option class="bg-ticketBg" value="" selected disabled>
           {{ props.placeholder }}
         </option>
         <option
