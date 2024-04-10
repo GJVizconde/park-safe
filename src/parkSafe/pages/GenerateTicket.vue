@@ -90,7 +90,7 @@ const successToast = () => {
 
 const getAllUsers = async () => {
   try {
-    const dataUsers = (await axios.get(`${BASE_URL.value}/user`)).data
+    const dataUsers = (await axios.get(`${BASE_URL.value}/user?ticket=false&hasVehicle=true`)).data
     users.value = dataUsers
   } catch (error) {
     console.error('Error al obtener el ticket:', error)
@@ -99,7 +99,15 @@ const getAllUsers = async () => {
 
 const generateTicket = async (body: FormData) => {
   try {
-    const ticket = (await axios.post(`${BASE_URL.value}/ticket/`, body)).data
+    const ticket = (
+      await axios.post(`${BASE_URL.value}/ticket/`, body, {
+        headers: {
+          'X-Timezone-Offset': new Date().getTimezoneOffset()
+        }
+      })
+    ).data
+
+    console.log(ticket)
     dataTicket.value = ticket
     successToast()
   } catch (error) {
